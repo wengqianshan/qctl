@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, viewport-fit=cover">
+  <title>Quick Mouse</title>
+  <link rel="stylesheet" href="./index.css" />
+</head>
+<body>
+
+  <div id="touch">
+    <h1>Quick Mouse</h1>
+  </div>
+  <div id="actions">
+    <div class="action-main">
+      <div class="btn-group">
+        <span class="btn" data-val="escape">Esc</span>
+        <span class="btn" data-val="text">
+          <i class="iconfont">&#xe83d;</i>
+        </span>
+      </div>
+      <div class="btn-group">
+        <span class="btn" style="width: 78px;" data-val="space">
+          <i class="iconfont">&#xe835;</i>
+        </span>
+        <span class="btn" data-val="enter">
+          <i class="iconfont">&#xe6f0;</i>
+        </span>
+        <span class="btn" data-val="backspace">
+          <i class="iconfont">&#xe704;</i>
+        </span>
+      </div>
+      <div class="btn-group">
+        <span class="btn" data-val="audio_play">
+          <i class="iconfont">&#xe6ed;</i>
+        </span>
+        <span class="btn" data-val="audio_pause">
+          <i class="iconfont">&#xe6ee;</i>
+        </span>
+        <span class="btn" data-val="audio_vol_down">
+          <i class="iconfont">&#xe6f5;</i>
+        </span>
+        <span class="btn" data-val="audio_vol_up">
+          <i class="iconfont">&#xe6f3;</i>
+        </span>
+      </div>
+      <div class="btn-group">
+        <span class="btn" data-val="left">
+          <i class="iconfont" style="transform: rotate(180deg);">&#xe6ed;</i>
+        </span>
+        <span class="btn" data-val="up">
+          <i class="iconfont" style="transform: rotate(-90deg);">&#xe6ed;</i>
+        </span>
+        <span class="btn" data-val="down">
+          <i class="iconfont" style="transform: rotate(90deg);">&#xe6ed;</i>
+        </span>
+        <span class="btn" data-val="right">
+          <i class="iconfont">&#xe6ed;</i>
+        </span>
+      </div>
+    </div>
+    <div class="action-bar">
+      <span class="btn" data-val="keyboard">
+        <i class="iconfont">&#xe655;</i>
+      </span>
+    </div>
+  </div>
+  <input id="input" z-index="-1" />
+  <div id="error" class="hide">已断开连接!</div>
+
+  <script src="./socket.io.js"></script>
+  <script src="./hammer.min.js"></script>
+  <script src="./index.js"></script>
+</body>
+</html>
