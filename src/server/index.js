@@ -13,7 +13,7 @@ import QRCode from 'qrcode'
 import mouse from './mouse.js'
 import path from 'path'
 
-let service = null
+let server = null
 
 // fix: esm 模块引入问题
 const loadModule = async () => {
@@ -25,7 +25,7 @@ export const start = async function (callback) {
   const getPort = await loadModule()
   // web服务和websocket服务初始化
   const app = express()
-  const server = http.createServer(app)
+  server = http.createServer(app)
   const io = new Server(server)
 
   // web资源路由
@@ -56,16 +56,17 @@ export const start = async function (callback) {
   const ip = localIpUrl()
   const port = await getPort({ port: 3000 })
   const url = `http://${ip}:${port}`
-  service = server.listen(port, () => {
-    callback({ service, ip, port })
+  server.listen(port, () => {
+    callback({ ip, port })
     console.log(`web服务启动成功 访问地址: ${url}`)
     // 生成二维码
     QRCode.toString(url, { type: 'terminal' }, function (err, url) {
       console.log(url)
     })
   })
+  return server
 }
 
 export const stop = function () {
-  service && service.close()
+  server && server.close()
 }

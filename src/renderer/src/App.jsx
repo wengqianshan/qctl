@@ -6,17 +6,23 @@ function App() {
   const [server, setServer] = useState()
   const [qrcode, setQrcode] = useState()
   const [permission, setPermission] = useState()
+  const [loading, setLoading] = useState(false)
   const start = async () => {
+    setLoading(true)
+    console.log('启动服务 >>>>>>>>>>>>>>>>>')
     const info = await window.electron.ipcRenderer.invoke('app.server')
     const { ip, port } = info
     const url = `http://${ip}:${port}`
     const data = await QRCode.toDataURL(url, { width: 280, height: 280 })
     setQrcode(data)
     setServer({ url })
+    setLoading(false)
   }
 
   const stop = () => {
+    console.log('停止服务 <<<<<<<<<<<<<<<<<<<')
     window.electron.ipcRenderer.send('app.stop')
+    setServer(null)
   }
 
   const exit = () => {
@@ -45,13 +51,20 @@ function App() {
     if (!permission) {
       return
     }
+    if (loading) {
+      return
+    }
+    if (permission !== 'authorized' && server) {
+      return stop()
+    }
+    if (server) {
+      return
+    }
     if (permission === 'authorized') {
       start()
-    } else {
-      stop()
     }
     return () => {}
-  }, [permission])
+  }, [permission, loading, server])
 
   useEffect(() => {
     const { platform } = window.api

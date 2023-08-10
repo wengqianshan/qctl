@@ -19,6 +19,7 @@ ipcMain.handle('app.server', async () => {
   if (serverInfo) {
     return serverInfo
   }
+  console.log('app.start', '---------------')
   serverInfo = await startServer()
   return serverInfo
 })
