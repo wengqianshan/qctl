@@ -13,7 +13,7 @@ function App() {
     const info = await window.electron.ipcRenderer.invoke('app.server')
     const { ip, port } = info
     const url = `http://${ip}:${port}`
-    const data = await QRCode.toDataURL(url, { width: 280, height: 280 })
+    const data = await QRCode.toDataURL(url, { width: 300, height: 300, margin: 1 })
     setQrcode(data)
     setServer({ url })
     setLoading(false)
